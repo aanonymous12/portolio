@@ -1,0 +1,25 @@
+document.addEventListener("DOMContentLoaded", function () {
+    const formData = localStorage.getItem("formData");
+    const formDataArray = formData ? JSON.parse(formData) : [];
+
+    const formDataContainer = document.getElementById("form-data");
+
+    if (formDataArray.length > 0) {
+        formDataContainer.innerHTML = ""; // Clear existing content
+
+        formDataArray.forEach(function (data, index) {
+            const dataDiv = document.createElement("div");
+            dataDiv.innerHTML = `
+                <h3>Entry ${index + 1}</h3>
+                <p><strong>Name:</strong> ${data.name}</p>
+                <p><strong>Email:</strong> ${data.email}</p>
+                <p><strong>Subject:</strong> ${data.subject}</p>
+                <p><strong>Message:</strong> ${data.message}</p>
+                <hr>
+            `;
+            formDataContainer.appendChild(dataDiv);
+        });
+    } else {
+        formDataContainer.innerHTML = "No form data stored.";
+    }
+});

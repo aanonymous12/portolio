@@ -144,3 +144,32 @@ $(document).ready(function(){
         }
     });
 });
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById("contact-form");
+    const submitButton = document.getElementById("submit-button");
+    const confirmationMessage = document.getElementById("confirmation");
+
+    submitButton.addEventListener("click", function () {
+        // Show confirmation message
+        confirmationMessage.style.display = "block";
+
+        // Get form data
+        const formData = new FormData(form);
+        const formDataObject = {};
+
+        formData.forEach(function (value, key) {
+            formDataObject[key] = value;
+        });
+
+        // Store form data in local storage
+        const storedData = localStorage.getItem("formData");
+        const formDataArray = storedData ? JSON.parse(storedData) : [];
+
+        formDataArray.push(formDataObject);
+
+        localStorage.setItem("formData", JSON.stringify(formDataArray));
+
+        // Clear form fields
+        form.reset();
+    });
+});
