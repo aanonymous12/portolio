@@ -36,14 +36,14 @@ $(document).ready(function(){
     // typing text animation script
     var typed = new Typed(".typing", {
         strings: ["Learner", "Developer", "Editor", "Designer", "Freelancer"],
-        typeSpeed: 100,
+        typeSpeed: 70,
         backSpeed: 60,
         loop: true
     });
 
     var typed = new Typed(".typing-2", {
         strings: ["Learner", "Developer", "Editor", "Designer", "Freelancer"],
-        typeSpeed: 100,
+        typeSpeed: 70,
         backSpeed: 60,
         loop: true
     });
@@ -109,14 +109,14 @@ $(document).ready(function(){
     // typing text animation script
     var typed = new Typed(".typing", {
         strings: ["Learner", "Developer", "Editor", "Designer", "Freelancer"],
-        typeSpeed: 100,
+        typeSpeed: 70,
         backSpeed: 60,
         loop: true
     });
 
     var typed = new Typed(".typing-2", {
         strings: ["Learner", "Developer", "Editor", "Designer", "Freelancer"],
-        typeSpeed: 100,
+        typeSpeed: 70,
         backSpeed: 60,
         loop: true
     });
