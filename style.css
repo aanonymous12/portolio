@@ -748,12 +748,9 @@ footer span a:hover{
     }
 }
 /* Blog section title styling */
-
-/* Blog section title styling */
-/* Blog section title styling */
 .blog .title {
     text-align: center;
-    font-size: 28px;
+    font-size: 24px; /* Reduce title font size */
     margin-top: 20px;
     color: crimson;
     position: relative;
@@ -761,29 +758,29 @@ footer span a:hover{
 
 .blog-section {
     display: flex;
-    flex-wrap: wrap; /* Allow items to wrap to the next line on small screens */
+    flex-wrap: wrap;
     justify-content: space-between;
-    margin: 0px;
-    background-color: black;
+    margin: 0;
+    background-color: #111;
 }
 
 .blog-article {
-    background-color: #333; /* Initial color - lighter black */
+    background-color: #333;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 20px;
+    padding: 10px; /* Reduced padding */
     width: calc(30% - 20px); /* Adjusted for small screens */
     text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin-top: 20px;
-    transition: background-color 0.3s; /* Smooth transition effect */
+    margin: 30px; /* Reduced margin */
+    transition: background-color 0.3s;
 }
 
 .blog-article img {
     width: 100%;
-    height: 200px;
+    height: 150px; /* Reduced image height */
     object-fit: cover;
     border-radius: 10px;
 }
@@ -794,17 +791,17 @@ footer span a:hover{
 }
 
 .blog-article .title {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     margin: 10px 0;
-    color: White;
+    color: white;
 }
 
 .blog-article .text {
-    font-size: 16px;
+    font-size: 14px; /* Reduced text font size */
     line-height: 1.5;
     margin-bottom: 10px;
-    color: white; /* Set text color to white */
+    color: white;
     flex-grow: 1;
 }
 
@@ -819,6 +816,34 @@ footer span a:hover{
     transition: background-color 0.3s;
     margin-top: 10px;
 }
+
+/* Responsive Media Queries */
+@media (max-width: 991px) {
+    .blog-article {
+        width: calc(33.33% - 20px); /* Adjusted for medium-sized screens */
+    }
+}
+
+@media (max-width: 767px) {
+    .blog-article {
+        width: 100%; /* Full width on small screens */
+    }
+}
+
+
+.gallery .title::after{
+    content: "My Memories";
+}
+.blog .title::after{
+    content: "Content";
+}
+.blog-card-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 10px 0;
+    color: White;
+}
+
 /* Responsive Media Queries */
 @media (max-width: 991px) {
     .blog-article {
