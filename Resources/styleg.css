@@ -1,0 +1,120 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: capitalize;
+    transition: all .2s cubic-bezier(.34, 1.12, .68, 1.31);
+}
+
+.gallery {
+    min-height: 100vh;
+    background: #eee;
+    padding-bottom: 100px;
+}
+
+.gallery .controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 20px 0;
+    list-style: none;
+}
+
+.gallery .controls .buttons {
+    height: 40px;
+    width: 140px;
+    background: #fff;
+    color: #666;
+    font-size: 16px;
+    line-height: 40px;
+    cursor: pointer;
+    margin: 10px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+    text-align: center;
+}
+
+.gallery .controls .buttons.active {
+    background: crimson;
+    color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+    .gallery .controls {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .gallery .controls .buttons {
+        width: 100%;
+        margin: 5px 0; /* Adjusted margin for better spacing */
+    }
+
+    .gallery .image-container .image {
+        width: calc(100% - 20px);
+        margin: 10px 0; /* Adjusted margin for better spacing */
+    }
+}
+
+.gallery .image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.gallery .image-container .image {
+    height: 250px;
+    width: 350px;
+    overflow: hidden;
+    border: 8px solid rgba(0, 0, 0, 0.3);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, .3);
+    margin: 20px;
+    transition: all .2s cubic-bezier(.34, 1.12, .68, 1.31);
+    position: relative;
+}
+
+.gallery .image-container .image:before,
+.gallery .image-container .image:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border: 8px solid transparent;
+    transition: all .2s cubic-bezier(.34, 1.12, .68, 1.31);
+}
+
+.gallery .image-container .image:before {
+    top: 0;
+    left: 0;
+    border-top-color: #fff;
+    border-right-color: #fff;
+}
+
+.gallery .image-container .image:after {
+    bottom: 0;
+    right: 0;
+    border-bottom-color: #fff;
+    border-left-color: #fff;
+}
+
+.gallery .image-container .image:hover {
+    border-color: transparent;
+}
+
+.gallery .image-container .image:hover:before,
+.gallery .image-container .image:hover:after {
+    border-color: crimson;
+}
+
+.gallery .image-container .image img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.gallery .image-container .image:hover img {
+    transform: scale(1.4);
+}
