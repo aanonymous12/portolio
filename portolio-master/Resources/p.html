@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #verification-container, #content-container {
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      background-color: crimson;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    #content-container {
+      display: none;
+      margin-top: 20px;
+    }
+  </style>
+  <title>Access Resume</title>
+</head>
+<body>
+
+<div id="verification-container">
+  <h2>Enter Verification Code</h2>
+  <form id="verification-form">
+    <label for="verificationCode">Verification Code:</label>
+    <input type="text" id="verificationCode" name="verificationCode" required>
+
+    <button type="button" onclick="validateVerificationCode()">Access Resume</button>
+  </form>
+
+  <p id="verification-message"></p>
+</div>
+
+<div id="content-container">
+  <!-- Content to display after successful verification -->
+  <h2>Resume Content</h2>
+  <p>This is the resume content that you want to display after successful verification.</p>
+</div>
+<script>
+  function getCurrentDateCode() {
+    var today = new Date();
+    var day = today.getDate().toString().padStart(2, '0');
+    var year = today.getFullYear();
+    var month = (today.getMonth() + 1).toString().padStart(2, '0');
+
+    return day + year + month;
+  }
+
+  function validateVerificationCode() {
+    var enteredCode = document.getElementById('verificationCode').value;
+    var verificationMessage = document.getElementById('verification-message');
+    var verificationContainer = document.getElementById('verification-container');
+    var contentContainer = document.getElementById('content-container');
+
+    var correctCode = getCurrentDateCode();
+
+    if (enteredCode === correctCode) {
+      verificationMessage.style.color = 'crimson';
+      verificationMessage.innerHTML = 'Verification successful!';
+
+      // Redirect to resu.html upon successful verification
+      window.location.href = 'resu.html';
+    } else {
+      verificationMessage.style.color = 'red';
+      verificationMessage.innerHTML = 'Incorrect verification code. Please try again.';
+    }
+  }
+</script>
+
+</body>
+</html>
