@@ -874,11 +874,11 @@ footer span a:hover{
 .gallery {
     position: relative;
 }
-
 .see-more-btn {
     position: absolute;
-    bottom: 50px; 
-    right: 110px; 
+    bottom: 50px;
+    right: 50%;
+    transform: translateX(50%);
     z-index: 1;
 }
 
@@ -895,11 +895,27 @@ footer span a:hover{
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-top: 10px;
 }
 
 #seeMoreBtn:hover {
     background-color: #fff;
     color: crimson;
 }
+
+@media (max-width: 768px) {
+    .see-more-btn {
+        position: relative;
+        bottom: auto;
+        right: auto;
+        text-align: center;
+        transform: none;
+    }
+
+    #seeMoreBtn {
+        margin: 10px auto;
+    }
+}
+
 
 
