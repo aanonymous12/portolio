@@ -1,3 +1,0 @@
-User-agent: *
-Disallow: /Resources/resu.html/
-Disallow: /Resources/p.html/
