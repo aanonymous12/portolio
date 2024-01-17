@@ -84,17 +84,7 @@ body{
     color: #f7f7f7ec;
     padding-top: 3rem;
 }
-.main-title::after {
-    content: "";
-    position: absolute;
-    width: 60%;
-    height: .1rem;
-    background-color: white;
-    border-radius: 12px;
-    left: 0;
-    top: 30px;
-    transform: translateY(-50%);
-}
+
 
 .contact-info ul{
     padding-top: 2rem;
