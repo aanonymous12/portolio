@@ -1,4 +1,3 @@
-<script type="application/ld+json">
 {
   "@context": "https://schema.org/", 
   "@type": "BreadcrumbList", 
@@ -24,4 +23,3 @@
     "item": "https://www.janakpanthi.com.np/#contact"  
   }]
 }
-</script>
