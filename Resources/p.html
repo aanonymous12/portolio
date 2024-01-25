@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
 
   <style>
     body {
@@ -68,6 +67,7 @@
   <h2>Resume Content</h2>
   <p>This is the resume content that you want to display after successful verification.</p>
 </div>
+
 <script>
   function getCurrentDateCode() {
     var today = new Date();
@@ -87,7 +87,7 @@
     var correctCode = getCurrentDateCode();
 
     if (enteredCode === correctCode) {
-      verificationMessage.style.color = 'crimson';
+      verificationMessage.style.color = 'green'; // Set color to green
       verificationMessage.innerHTML = 'Verification successful!';
 
       // Redirect to resu.html upon successful verification
