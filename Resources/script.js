@@ -144,3 +144,39 @@ $(document).ready(function(){
         }
     });
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("contactForm");
+    const statusMessage = document.getElementById("statusMessage");
+
+    form.addEventListener("submit", function(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        const formData = new FormData(form);
+
+        fetch("https://formspree.io/f/mvojzgrw", {
+            method: "POST",
+            body: formData,
+            headers: {
+                "Accept": "application/json"
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                form.reset();
+                statusMessage.textContent = "Thank you for contacting us!";
+                statusMessage.classList.remove("error");
+                statusMessage.style.display = "block";
+            } else {
+                statusMessage.textContent = "Oops! There was a problem submitting your form";
+                statusMessage.classList.add("error");
+                statusMessage.style.display = "block";
+            }
+        })
+        .catch(error => {
+            statusMessage.textContent = "Oops! There was a problem submitting your form";
+            statusMessage.classList.add("error");
+            statusMessage.style.display = "block";
+        });
+    });
+});

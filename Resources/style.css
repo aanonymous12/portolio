@@ -916,6 +916,16 @@ footer span a:hover{
         margin: 10px auto;
     }
 }
+.status-message {
+    text-align: center;
+    margin-top: 20px;
+    color: green;
+    display: none;
+}
 
+.status-message.error {
+    color: red;
+    display: block;
+}
 
 
