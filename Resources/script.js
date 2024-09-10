@@ -180,3 +180,18 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
+ const menuBtn = document.querySelector(".menu-btn i");
+        const menu = document.querySelector(".menu");
+        const menuLinks = document.querySelectorAll(".menu li a");
+
+        // Toggle menu when hamburger icon is clicked
+        menuBtn.addEventListener("click", () => {
+            menu.classList.toggle("active");
+        });
+
+        // Close the menu when a link is clicked
+        menuLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                menu.classList.remove("active");
+            });
+        });
