@@ -257,7 +257,6 @@ section .title::after{
     background: none;
 }
 
-/* Project section styling */ 
 .project, .teams {
     color: #fff;
     background: #111;
@@ -268,7 +267,7 @@ section .title::after{
     background: #fff;
 }
 
-.project .title::after{
+.project .title::after {
     content: "Some majors";
 }
 
@@ -280,20 +279,20 @@ section .title::after{
 .project .project-content {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px; /* Space between cards */
-    justify-content: space-between; /* Space cards evenly */
+    gap: 20px;
+    justify-content: space-between;
 }
 
 .project .project-card {
-    width: calc(33% - 20px); /* Adjust for spacing */
+    width: calc(33% - 20px);
     background: #222;
     text-align: center;
     border-radius: 6px;
     padding: 30px 20px;
     cursor: pointer;
     transition: all 0.3s ease;
-    color: #fff; /* Ensure text is white */
-    box-sizing: border-box; /* Include padding in width calculation */
+    color: #fff;
+    box-sizing: border-box;
 }
 
 .project .project-card:hover {
@@ -309,7 +308,7 @@ section .title::after{
 }
 
 .project .project-card .logo {
-    width: 80px; /* Adjust size as needed */
+    width: 80px;
     height: 80px;
     border-radius: 50%;
     object-fit: cover;
@@ -365,16 +364,19 @@ section .title::after{
     color: crimson;
 }
 
-/* Responsive styles */
 @media (max-width: 1200px) {
     .project .project-card {
-        width: calc(50% - 20px); /* Two cards per row on medium screens */
+        width: calc(50% - 20px);
     }
 }
 
 @media (max-width: 768px) {
+    .project .project-content {
+        justify-content: center;
+    }
+    
     .project .project-card {
-        width: calc(100% - 20px); /* One card per row on small screens */
+        width: calc(100% - 20px);
     }
     
     .project .title::after {
@@ -388,7 +390,7 @@ section .title::after{
     }
     
     .project .project-card .logo {
-        width: 60px; /* Smaller logo for very small screens */
+        width: 60px;
         height: 60px;
     }
 }
