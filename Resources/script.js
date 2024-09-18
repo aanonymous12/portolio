@@ -219,3 +219,9 @@ document.querySelectorAll('.btn-readmore').forEach(button => {
     
     // Set the year in the footer
     document.getElementById('current-year').textContent = currentYear;
+
+// Get the current year
+const currentYear = new Date().getFullYear();
+
+// Set the year in the footer
+document.getElementById('current-year').textContent = currentYear;
