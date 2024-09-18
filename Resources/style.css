@@ -257,50 +257,140 @@ section .title::after{
     background: none;
 }
 
-/* services section styling */
-.services, .teams{
-    color:#fff;
+/* Project section styling */ 
+.project, .teams {
+    color: #fff;
     background: #111;
 }
-.services .title::before,
-.teams .title::before{
+
+.project .title::before,
+.teams .title::before {
     background: #fff;
 }
-.services .title::after,
-.teams .title::after{
+
+.project .title::after{
+    content: "Some majors";
+}
+
+.teams .title::after {
     background: #111;
     content: "";
 }
-.services .serv-content .card{
-    width: calc(33% - 20px);
+
+.project .project-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between cards */
+    justify-content: space-between; /* Space cards evenly */
+}
+
+.project .project-card {
+    width: calc(33% - 20px); /* Adjust for spacing */
     background: #222;
     text-align: center;
     border-radius: 6px;
-    padding: 50px 25px;
+    padding: 30px 20px;
     cursor: pointer;
     transition: all 0.3s ease;
+    color: #fff; /* Ensure text is white */
+    box-sizing: border-box; /* Include padding in width calculation */
 }
-.services .serv-content .card:hover{
+
+.project .project-card:hover {
     background: crimson;
 }
-.services .serv-content .card .box{
+
+.project .project-card .box {
     transition: all 0.3s ease;
 }
-.services .serv-content .card:hover .box{
+
+.project .project-card:hover .box {
     transform: scale(1.05);
 }
-.services .serv-content .card i{
-    font-size: 50px;
-    color: crimson;
-    transition: color 0.3s ease;
+
+.project .project-card .logo {
+    width: 80px; /* Adjust size as needed */
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto;
 }
-.services .serv-content .card:hover i{
-    color: #fff;
-}
-.services .serv-content .card .text{
+
+.project .project-card .text {
     font-size: 25px;
     font-weight: 500;
     margin: 10px 0 7px 0;
+}
+
+.project .project-card .short-desc {
+    display: block;
+}
+
+.project .project-card .full-desc {
+    display: none;
+    margin-top: 10px;
+}
+
+.project .button-container {
+    margin-top: 20px;
+}
+
+.project .button-container a {
+    color: #fff;
+    background: crimson;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    margin: 5px;
+    display: inline-block;
+    transition: background 0.3s ease;
+}
+
+.project .button-container a.btn-readmore {
+    display: inline-block;
+}
+
+.project .button-container a.btn-visit {
+    background: #333;
+}
+
+.project .button-container a:hover {
+    background: #fff;
+    color: crimson;
+}
+
+.project .button-container a.btn-visit:hover {
+    background: #fff;
+    color: crimson;
+}
+
+/* Responsive styles */
+@media (max-width: 1200px) {
+    .project .project-card {
+        width: calc(50% - 20px); /* Two cards per row on medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .project .project-card {
+        width: calc(100% - 20px); /* One card per row on small screens */
+    }
+    
+    .project .title::after {
+        content: "";
+    }
+}
+
+@media (max-width: 480px) {
+    .project .project-card .text {
+        font-size: 20px;
+    }
+    
+    .project .project-card .logo {
+        width: 60px; /* Smaller logo for very small screens */
+        height: 60px;
+    }
 }
 
 /* skills section styling */

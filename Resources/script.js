@@ -195,3 +195,27 @@ document.addEventListener("DOMContentLoaded", function() {
                 menu.classList.remove("active");
             });
         });
+document.querySelectorAll('.btn-readmore').forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const card = this.closest('.project-card');
+        const shortDesc = card.querySelector('.short-desc');
+        const fullDesc = card.querySelector('.full-desc');
+        const isExpanded = fullDesc.style.display === 'block';
+
+        if (isExpanded) {
+            shortDesc.style.display = 'block';
+            fullDesc.style.display = 'none';
+            this.textContent = 'Read More';
+        } else {
+            shortDesc.style.display = 'none';
+            fullDesc.style.display = 'block';
+            this.textContent = 'Read Less';
+        }
+    });
+});
+// Get the current year
+    const currentYear = new Date().getFullYear();
+    
+    // Set the year in the footer
+    document.getElementById('current-year').textContent = currentYear;
