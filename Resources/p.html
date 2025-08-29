@@ -4,10 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Access Resume</title>
+ <link rel="icon" type="image/webpg" href="favicon.webp">
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+      background: linear-gradient(135deg, #f4f4f4, #e0e0e0);
       margin: 0;
       display: flex;
       align-items: center;
@@ -15,49 +17,114 @@
       height: 100vh;
     }
 
-    #verification-container,
-    #content-container {
+    #verification-container {
       background-color: #fff;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      width: 300px;
+      border-radius: 12px;
+      padding: 30px 25px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      width: 320px;
       text-align: center;
+      position: relative;
+    }
+
+    #verification-container img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 22px;
+      color: #333;
+    }
+
+    .input-container {
+      position: relative;
+      width: 100%;
     }
 
     input {
       width: 100%;
-      padding: 10px;
-      margin: 8px 0;
+      padding: 12px 40px 12px 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
       box-sizing: border-box;
+      transition: border-color 0.3s;
+    }
+
+    input:focus {
+      border-color: crimson;
+      outline: none;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 18px;
+      color: #555;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .toggle-password svg {
+      width: 22px;
+      height: 22px;
+      fill: #555;
     }
 
     button {
       width: 100%;
       background-color: crimson;
       color: white;
-      padding: 10px;
+      padding: 12px;
+      margin-top: 10px;
       border: none;
-      border-radius: 4px;
+      border-radius: 6px;
+      font-size: 16px;
       cursor: pointer;
+      transition: background-color 0.3s;
     }
 
-    #content-container {
-      display: none;
-      margin-top: 20px;
+    button:hover {
+      background-color: darkred;
+    }
+
+    #verification-message {
+      margin-top: 15px;
+      font-size: 14px;
     }
   </style>
-  <title>Access Resume</title>
 </head>
 
 <body>
 
   <div id="verification-container">
+    <!-- Logo -->
+    <img src="favicon.webp" alt="Logo">
+
     <h2>Enter Verification Code</h2>
     <form id="verification-form" onsubmit="validateVerificationCode(); return false;">
-      <label for="verificationCode">Verification Code:</label>
-      <input type="text" id="verificationCode" name="verificationCode" autocomplete="off" required>
-
+      <div class="input-container">
+        <input type="password" id="verificationCode" name="verificationCode" placeholder="Enter code" autocomplete="off" required>
+        <span class="toggle-password" onclick="togglePassword()">
+          <!-- Eye icon -->
+          <svg id="eyeIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+            <path d="M572.52 241.4C518.5 135.5 407.6 64 288 64S57.5 135.5 3.48 241.4a48.2 48.2 0 0 0 0 29.2C57.5 376.5 168.4 448 
+            288 448s230.5-71.5 284.5-177.4a48.2 48.2 0 0 0 0-29.2zM288 
+            400c-79.4 0-144-64.6-144-144s64.6-144 
+            144-144 144 64.6 144 144-64.6 144-144 
+            144zm0-240a95.9 95.9 0 1 0 0 192 
+            95.9 95.9 0 0 0 0-192z"/>
+          </svg>
+        </span>
+      </div>
       <button type="submit">Access Resume</button>
     </form>
 
@@ -66,40 +133,72 @@
 
   <script>
     function getCurrentDateCode() {
-      var today = new Date();
-      var day = today.getDate().toString().padStart(2, '0');
-      var year = today.getFullYear();
-      var month = (today.getMonth() + 1).toString().padStart(2, '0');
-
+      const today = new Date();
+      const day = today.getDate().toString().padStart(2, '0');
+      const year = today.getFullYear();
+      const month = (today.getMonth() + 1).toString().padStart(2, '0');
       return day + year + month;
     }
 
     function obfuscateFixedPassword() {
-      // Obfuscation technique (simple example)
-      var obfuscatedPassword = "1" + "1" + "2" + "0" + "0" + "4" + "0" + "9";
-      return obfuscatedPassword;
+      return "11200409";
     }
 
     function validateVerificationCode() {
-      var enteredCode = document.getElementById('verificationCode').value;
-      var verificationMessage = document.getElementById('verification-message');
+      const enteredCode = document.getElementById('verificationCode').value;
+      const verificationMessage = document.getElementById('verification-message');
 
-      var correctDateCode = getCurrentDateCode();
-      var obfuscatedPassword = obfuscateFixedPassword();
+      const correctDateCode = getCurrentDateCode();
+      const obfuscatedPassword = obfuscateFixedPassword();
 
       if (enteredCode === correctDateCode || enteredCode === obfuscatedPassword) {
         verificationMessage.style.color = 'green';
         verificationMessage.innerHTML = 'Verification successful!';
-
-        // Redirect to resu.html upon successful verification
-        window.location.href = 'resu.html';
+        setTimeout(() => {
+          window.location.href = 'resu.html';
+        }, 800);
       } else {
         verificationMessage.style.color = 'red';
         verificationMessage.innerHTML = 'Incorrect verification code. Please try again.';
       }
     }
+
+    function togglePassword() {
+      const input = document.getElementById('verificationCode');
+      const eyeIcon = document.getElementById('eyeIcon');
+
+      if (input.type === "password") {
+        input.type = "text";
+        // Add slash across the eye
+        eyeIcon.innerHTML = `
+          <path d="M572.52 241.4C518.5 135.5 407.6 64 
+          288 64S57.5 135.5 3.48 241.4a48.2 
+          48.2 0 0 0 0 29.2C57.5 376.5 168.4 
+          448 288 448s230.5-71.5 284.5-177.4a48.2 
+          48.2 0 0 0 0-29.2zM288 
+          400c-79.4 0-144-64.6-144-144s64.6-144 
+          144-144 144 64.6 144 144-64.6 144-144 
+          144zm0-240a95.9 95.9 0 1 0 0 192 
+          95.9 95.9 0 0 0 0-192z"/>
+          <line x1="48" y1="48" x2="528" y2="464" stroke="black" stroke-width="40"/>
+        `;
+      } else {
+        input.type = "password";
+        // Normal eye
+        eyeIcon.innerHTML = `
+          <path d="M572.52 241.4C518.5 135.5 407.6 64 
+          288 64S57.5 135.5 3.48 241.4a48.2 
+          48.2 0 0 0 0 29.2C57.5 376.5 168.4 
+          448 288 448s230.5-71.5 284.5-177.4a48.2 
+          48.2 0 0 0 0-29.2zM288 
+          400c-79.4 0-144-64.6-144-144s64.6-144 
+          144-144 144 64.6 144 144-64.6 144-144 
+          144zm0-240a95.9 95.9 0 1 0 0 192 
+          95.9 95.9 0 0 0 0-192z"/>
+        `;
+      }
+    }
   </script>
 
 </body>
-
 </html>
