@@ -282,7 +282,7 @@
 <body>
     <div class="profile-card" 
          data-n="Janak Panthi"
-         data-p1="737" 
+         data-p1="1737" 
          data-p2="388" 
          data-p3="9174"
          data-e1="contact" 
@@ -378,55 +378,61 @@
             };
         }
 
-        function saveContact() {
-            const data = getContactData();
-            const nameParts = data.name.split(' ');
-            const lastName = nameParts.length > 1 ? nameParts.slice(-1)[0] : '';
-            const firstName = nameParts.length > 1 ? nameParts.slice(0, -1).join(' ') : nameParts[0];
+      function saveContact() {
+    const data = getContactData();
+    const imageUrl = 'Resources/images/janak_panthi.jpg';
 
-            let vCardData = `BEGIN:VCARD
+    getBase64Image(imageUrl, function (photoBase64) {
+
+        const nameParts = data.name.split(' ');
+        const lastName = nameParts.length > 1 ? nameParts.slice(-1)[0] : '';
+        const firstName = nameParts.length > 1 ? nameParts.slice(0, -1).join(' ') : nameParts[0];
+
+        let vCardData = `BEGIN:VCARD
 VERSION:3.0
 N;CHARSET=UTF-8:${lastName};${firstName};;;
 FN;CHARSET=UTF-8:${data.name}
+PHOTO;ENCODING=b;TYPE=JPEG:${photoBase64}
 TEL;CHARSET=UTF-8:${data.phone}
 EMAIL;CHARSET=UTF-8:${data.email}
 URL;CHARSET=UTF-8:${data.url}`;
 
-            if (data.post) {
-                vCardData += `
-TITLE;CHARSET=UTF-8:${data.post}`;
-            }
-
-            if (data.institution) {
-                vCardData += `
-ORG;CHARSET=UTF-8:${data.institution}`;
-            }
-
-            if (data.linkedin) {
-                vCardData += `
-X-SOCIALPROFILE;TYPE=linkedin:${data.linkedin}`;
-            }
-
-            if (data.github) {
-                vCardData += `
-X-SOCIALPROFILE;TYPE=github:${data.github}`;
-            }
-
+        if (data.post) {
             vCardData += `
+TITLE;CHARSET=UTF-8:${data.post}`;
+        }
+
+        if (data.institution) {
+            vCardData += `
+ORG;CHARSET=UTF-8:${data.institution}`;
+        }
+
+        if (data.linkedin) {
+            vCardData += `
+X-SOCIALPROFILE;TYPE=linkedin:${data.linkedin}`;
+        }
+
+        if (data.github) {
+            vCardData += `
+X-SOCIALPROFILE;TYPE=github:${data.github}`;
+        }
+
+        vCardData += `
 END:VCARD`;
 
-            const blob = new Blob([vCardData], { type: 'text/vcard;charset=utf-8' });
-            const blobURL = URL.createObjectURL(blob);
+        const blob = new Blob([vCardData], { type: 'text/vcard;charset=utf-8' });
+        const url = URL.createObjectURL(blob);
 
-            const a = document.createElement('a');
-            a.href = blobURL;
-            a.setAttribute('download', 'Janak_Panthi.vcf');
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Janak_Panthi.vcf';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    });
+}
 
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(blobURL);
-        }
 
         function sendEmail() {
             const data = getContactData();
