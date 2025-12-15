@@ -382,7 +382,7 @@
             const lastName = nameParts.length > 1 ? nameParts.slice(-1)[0] : '';
             const firstName = nameParts.length > 1 ? nameParts.slice(0, -1).join(' ') : nameParts[0];
 
-            // Fetch and convert image to base64
+            
             let photoBase64 = '';
             try {
                 const imageUrl = 'https://www.janakpanthi.com.np/Resources/images/janak_panthi.jpg';
@@ -400,6 +400,18 @@
                 console.error('Error fetching image:', error);
             }
 
+
+            let noteContent = 'Connect with me:\n\n';
+            if (data.linkedin) {
+                noteContent += `LinkedIn: ${data.linkedin}\n`;
+            }
+            if (data.github) {
+                noteContent += `GitHub: ${data.github}\n`;
+            }
+            noteContent += `Facebook: https://www.facebook.com/janak.panthi.78\n`;
+            noteContent += `WhatsApp: https://wa.me/17373889174\n`;
+            noteContent += `Website: ${data.url}`;
+
             let vCardData = `BEGIN:VCARD
 VERSION:3.0
 N;CHARSET=UTF-8:${lastName};${firstName};;;
@@ -408,7 +420,8 @@ TEL;CHARSET=UTF-8:${data.phone}
 EMAIL;CHARSET=UTF-8:${data.email}
 URL;CHARSET=UTF-8:${data.url}
 TITLE;CHARSET=UTF-8:${data.post}
-ORG;CHARSET=UTF-8:${data.institution}`;
+ORG;CHARSET=UTF-8:${data.institution}
+NOTE;CHARSET=UTF-8:${noteContent}`;
 
             if (photoBase64) {
                 vCardData += `
