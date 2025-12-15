@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Janak Panthi</title>
+    <link rel="icon" href="Resources/favicon.webp" type="image/webp">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #1c1c1e, #2e2e2e);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .profile-card {
+            background-color: #333;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            overflow: hidden;
+            position: relative;
+            padding: 50px 40px;
+        }
+
+        .logo {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            width: 50px;
+            height: 50px;
+            opacity: 0.8;
+        }
+
+        .profile-header {
+            margin-top: 50px;
+            margin-bottom: 35px;
+        }
+
+        .profile-img {
+            border-radius: 50%;
+            width: 140px;
+            height: 140px;
+            border: 5px solid #dc143c;
+            margin-bottom: 25px;
+            object-fit: cover;
+        }
+
+        .profile-name {
+            font-size: 36px;
+            margin: 15px 0 10px;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+
+        .profile-post {
+            font-size: 18px;
+            color: #dc143c;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .profile-institution {
+            font-size: 15px;
+            color: #aaa;
+            margin-bottom: 25px;
+        }
+
+        .profile-about {
+            font-size: 15px;
+            color: #ccc;
+            line-height: 1.7;
+            margin-bottom: 35px;
+            padding: 0 20px;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .profile-contact {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+        }
+
+        .round-btn {
+            background-color: #dc143c;
+            border: none;
+            color: white;
+            padding: 14px 28px;
+            text-decoration: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 15px;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .round-btn:hover {
+            background-color: #b01030;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(220, 20, 60, 0.5);
+        }
+
+        .profile-social-media {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+        }
+
+        .social-media-link img {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-media-link img:hover {
+            opacity: 0.8;
+        }
+
+        .profile-contact-info,
+        .profile-location {
+            font-size: 15px;
+            color: #ccc;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            padding: 8px 15px;
+            border-radius: 8px;
+        }
+
+        .profile-contact-info:hover,
+        .profile-location:hover {
+            color: #dc143c;
+            background: rgba(220, 20, 60, 0.1);
+        }
+
+        .contact-icon {
+            font-size: 18px;
+            color: #dc143c;
+        }
+
+        .protected-info {
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .qr-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .qr-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .qr-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            cursor: pointer;
+            color: #666;
+            font-size: 28px;
+            font-weight: 300;
+            transition: color 0.3s;
+        }
+
+        .qr-close:hover {
+            color: #333;
+        }
+
+        #qrcode {
+            margin: 20px 0;
+        }
+
+        #qrcode svg {
+            width: 280px;
+            height: 280px;
+        }
+
+        @media (max-width: 768px) {
+            .profile-card {
+                padding: 30px 20px;
+                max-width: 100%;
+                border-radius: 15px;
+            }
+
+
+
+            .logo {
+                width: 45px;
+                height: 45px;
+                top: 20px;
+                left: 20px;
+            }
+
+            .profile-header {
+                margin-top: 40px;
+            }
+
+            .profile-img {
+                width: 120px;
+                height: 120px;
+                border: 4px solid #dc143c;
+            }
+
+            .profile-name {
+                font-size: 28px;
+            }
+
+            .profile-post {
+                font-size: 15px;
+            }
+
+            .profile-institution {
+                font-size: 14px;
+            }
+
+            .profile-about {
+                font-size: 13px;
+            }
+
+            .round-btn {
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+
+            .social-media-link img {
+                width: 32px;
+                height: 32px;
+            }
+
+            .profile-contact-info,
+            .profile-location {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-card" 
+         data-n="Janak Panthi"
+         data-p1="737" 
+         data-p2="388" 
+         data-p3="9174"
+         data-e1="contact" 
+         data-e2="janakpanthi"
+         data-e3="com.np"
+         data-url="https://www.janakpanthi.com.np"
+         data-linkedin="https://www.linkedin.com/in/janakpanthi"
+         data-github="https://github.com/janakpanthi"
+         data-post="Digital Marketing Enthusiast" 
+         data-inst="Entrepreneur">
+        
+        <a href="https://janakpanthi.com.np">
+            <img src="Resources/favicon.webp" alt="Logo" class="logo">
+        </a>
+
+        <div class="profile-header">
+            <img src="Resources/images/janak_panthi.jpg" alt="Janak Panthi" class="profile-img">
+            <h1 class="profile-name">Janak Panthi</h1>
+            <p class="profile-post">Digital Marketing Enthusiast</p>
+            <p class="profile-institution">Entrepreneur</p>
+            <p class="profile-about">A dedicated professional from Butwal, Nepal. Passionate about digital marketing, web design, and creating meaningful impact through innovative ventures like Link A Job and ROBAJ.</p>
+        </div>
+
+        <div class="profile-contact">
+            <button class="round-btn" onclick="saveContact()">Save Contact</button>
+            <button class="round-btn" onclick="makeCall()">Call</button>
+            <button class="round-btn" onclick="generateQR()">Share</button>
+        </div>
+
+        <div class="profile-social-media">
+            <a href="https://www.linkedin.com/in/janakpanthi" target="_blank" rel="noopener noreferrer" class="social-media-link">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/81/LinkedIn_icon.svg" alt="LinkedIn">
+            </a>
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-media-link">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" alt="GitHub">
+            </a>
+            <a href="https://www.facebook.com/janak.panthi.78" target="_blank" rel="noopener noreferrer" class="social-media-link">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+            </a>
+            <a href="#" onclick="openWhatsApp(event)" class="social-media-link">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+            </a>
+            <a href="https://www.janakpanthi.com.np" target="_blank" rel="noopener noreferrer" class="social-media-link">
+                <img src="Resources/images/website.png" alt="Website">
+            </a>
+        </div>
+
+        <div class="profile-contact-info" onclick="sendEmail()">
+            <i class="fas fa-envelope contact-icon"></i>
+            <p class="protected-info" id="emailDisplay"></p>
+        </div>
+
+        <div class="profile-location">
+            <i class="fas fa-map-marker-alt contact-icon"></i>
+            <p>San Marcos Texas</p>
+        </div>
+    </div>
+
+    <div id="qrModal" class="qr-modal">
+        <div class="qr-container">
+            <span class="qr-close" onclick="closeQRModal()">&times;</span>
+            <h2 style="color: #333; margin-bottom: 10px;">Share Profile</h2>
+            <div id="qrcode"></div>
+            <button class="round-btn" onclick="downloadQR()">Download QR</button>
+        </div>
+    </div>
+
+    <script>
+       
+        (function() {
+            const card = document.querySelector('.profile-card');
+            
+            
+            const email = card.getAttribute('data-e1') + '@' + card.getAttribute('data-e2') + '.' + card.getAttribute('data-e3');
+            
+            
+            setTimeout(() => {
+                document.getElementById('emailDisplay').textContent = email;
+            }, 100);
+        })();
+
+        function getContactData() {
+            const card = document.querySelector('.profile-card');
+            return {
+                name: card.getAttribute('data-n'),
+                phone: '+' + card.getAttribute('data-p1') + card.getAttribute('data-p2') + card.getAttribute('data-p3'),
+                email: card.getAttribute('data-e1') + '@' + card.getAttribute('data-e2') + '.' + card.getAttribute('data-e3'),
+                url: card.getAttribute('data-url'),
+                linkedin: card.getAttribute('data-linkedin'),
+                github: card.getAttribute('data-github'),
+                post: card.getAttribute('data-post'),
+                institution: card.getAttribute('data-inst')
+            };
+        }
+
+        function saveContact() {
+            const data = getContactData();
+            const nameParts = data.name.split(' ');
+            const lastName = nameParts.length > 1 ? nameParts.slice(-1)[0] : '';
+            const firstName = nameParts.length > 1 ? nameParts.slice(0, -1).join(' ') : nameParts[0];
+
+            let vCardData = `BEGIN:VCARD
+VERSION:3.0
+N;CHARSET=UTF-8:${lastName};${firstName};;;
+FN;CHARSET=UTF-8:${data.name}
+TEL;CHARSET=UTF-8:${data.phone}
+EMAIL;CHARSET=UTF-8:${data.email}
+URL;CHARSET=UTF-8:${data.url}`;
+
+            if (data.post) {
+                vCardData += `
+TITLE;CHARSET=UTF-8:${data.post}`;
+            }
+
+            if (data.institution) {
+                vCardData += `
+ORG;CHARSET=UTF-8:${data.institution}`;
+            }
+
+            if (data.linkedin) {
+                vCardData += `
+X-SOCIALPROFILE;TYPE=linkedin:${data.linkedin}`;
+            }
+
+            if (data.github) {
+                vCardData += `
+X-SOCIALPROFILE;TYPE=github:${data.github}`;
+            }
+
+            vCardData += `
+END:VCARD`;
+
+            const blob = new Blob([vCardData], { type: 'text/vcard;charset=utf-8' });
+            const blobURL = URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.href = blobURL;
+            a.setAttribute('download', 'Janak_Panthi.vcf');
+
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(blobURL);
+        }
+
+        function sendEmail() {
+            const data = getContactData();
+            window.location.href = 'mailto:' + data.email;
+        }
+
+        function makeCall() {
+            const data = getContactData();
+            window.location.href = 'tel:' + data.phone;
+        }
+
+        function openWhatsApp(event) {
+            event.preventDefault();
+            const data = getContactData();
+            const phone = data.phone.replace('+', '');
+           
+            window.open(`https://wa.me/1${phone}`, '_blank');
+        }
+
+        function generateQR() {
+            const currentURL = window.location.href;
+            const qrCode = qrcode(0, 'M');
+            qrCode.addData(currentURL);
+            qrCode.make();
+            const qrElement = document.getElementById('qrcode');
+            qrElement.innerHTML = qrCode.createSvgTag({ scalable: true });
+            document.getElementById('qrModal').style.display = 'flex';
+        }
+
+        function downloadQR() {
+            const data = getContactData();
+            const svg = document.getElementById('qrcode').querySelector('svg');
+            const svgData = new XMLSerializer().serializeToString(svg);
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+
+            const img = new Image();
+            img.onload = function () {
+                context.clearRect(0, 0, canvas.width, canvas.height);
+                canvas.width = img.width;
+                canvas.height = img.height;
+                context.drawImage(img, 0, 0);
+
+                canvas.toBlob(function (blob) {
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `${data.name}-QR.png`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                });
+            };
+            img.src = 'data:image/svg+xml;base64,' + btoa(svgData);
+        }
+
+        function closeQRModal() {
+            document.getElementById('qrModal').style.display = 'none';
+        }
+
+        
+        
+       
+        document.querySelectorAll('.protected-info').forEach(el => {
+            el.addEventListener('contextmenu', e => {
+                e.preventDefault();
+                return false;
+            });
+        });
+
+       
+        document.querySelectorAll('.protected-info').forEach(el => {
+            el.addEventListener('selectstart', e => {
+                e.preventDefault();
+                return false;
+            });
+        });
+
+        
+        document.addEventListener('copy', (e) => {
+            const selection = window.getSelection().toString();
+            if (selection.includes('+977') || selection.includes('@')) {
+                e.preventDefault();
+                e.clipboardData.setData('text/plain', 'For contact information, please use the Save Contact button.');
+            }
+        });
+
+       
+        (function() {
+            const checks = {
+                hasWebDriver: navigator.webdriver,
+                hasPhantom: window.phantom || window._phantom || window.callPhantom,
+                hasNightmare: window.__nightmare,
+                hasSelenium: document.$cdc_asdjflasutopfhvcZLmcfl_ || document.__webdriver_evaluate || document.__selenium_evaluate || document.__webdriver_script_function || document.__webdriver_script_func || document.__webdriver_script_fn || document.__fxdriver_evaluate || document.__driver_unwrapped || document.__webdriver_unwrapped || document.__driver_evaluate || document.__selenium_unwrapped || document.__fxdriver_unwrapped
+            };
+            
+            if (Object.values(checks).some(v => v)) {
+                document.body.style.display = 'none';
+            }
+        })();
+
+
+        const honeypot = document.createElement('div');
+        honeypot.style.display = 'none';
+        honeypot.setAttribute('data-phone', '+1234567890');
+        honeypot.setAttribute('data-email', 'fake@example.com');
+        document.body.appendChild(honeypot);
+    </script>
+</body>
+</html>
