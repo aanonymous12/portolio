@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DropNote - Free Online Notepad | Quick Text Sharing by Janak Panthi</title>
+<meta name="description" content="DropNote is a free, fast online notepad for quick text sharing. Write notes, share via link or QR code. No sign-up required. Created by Janak Panthi.">
+<meta name="keywords" content="online notepad, text editor, paste text, share notes, quick notepad, free notepad, text sharing, DropNote, Janak Panthi">
+<meta name="author" content="Janak Panthi">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://janakpanthi.com/dropnote">
+<link rel="icon" href="images\Dropnote.png">
+
+
+<meta property="og:title" content="DropNote - Free Online Notepad & Text Sharing">
+<meta property="og:description" content="Fast, free online notepad for writing and sharing text. No registration needed.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://janakpanthi.com/dropnote">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DropNote - Free Online Notepad">
+<meta name="twitter:description" content="Quick text sharing and note-taking tool by Janak Panthi">
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html {
+    color-scheme: light dark;
+    background: #fff;
+    color: #161616;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont;
+  }
+  @media (prefers-color-scheme: dark) {
+    html {
+      background: #111;
+      color: #fff;
+    }
+  }
+  body {
+    display: flex;
+  }
+  article {
+    outline: none;
+    padding: 24px max(24px, calc(50vw - 420px));
+    width: 100%;
+    min-height: 100vh;
+    font-size: 18px;
+    line-height: 1.6;
+    tab-size: 4;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    caret-color: crimson;
+  }
+  article:empty:before {
+    content: 'Drop your thoughts here...';
+    color: #999;
+    pointer-events: none;
+  }
+  @media (prefers-color-scheme: dark) {
+    article:empty:before {
+      color: #555;
+    }
+  }
+  ::selection {
+    background: crimson;
+    color: #fff;
+  }
+  .qr-panel {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 14px;
+    border-radius: 10px;
+    background: #fff;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    text-align: center;
+    font-size: 12px;
+    color: #555;
+    width: 150px;
+    z-index: 100;
+  }
+  .qr-panel img {
+    width: 120px;
+    height: 120px;
+    display: block;
+    margin: 0 auto 8px;
+  }
+  .qr-panel button {
+    margin-top: 6px;
+    width: 100%;
+    padding: 6px 8px;
+    font-size: 12px;
+    border-radius: 6px;
+    border: 1px solid crimson;
+    background: crimson;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  .qr-panel button:hover {
+    background: #fff;
+    color: crimson;
+  }
+  .qr-modal {
+    display: none;
+  }
+  @media (prefers-color-scheme: dark) {
+    .qr-panel {
+      background: #181818;
+      border-color: #222;
+      color: #aaa;
+    }
+  }
+  @media (max-width: 900px) {
+    article {
+      padding: 16px;
+      font-size: 16px;
+      min-height: calc(100vh - 60px);
+      padding-bottom: 70px;
+    }
+    .qr-panel {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      top: auto;
+      transform: none;
+      width: 100%;
+      border-radius: 0;
+      padding: 10px 16px;
+      box-shadow: 0 -1px 0 rgba(0,0,0,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      height: 60px;
+    }
+    .qr-panel img {
+      width: 40px;
+      height: 40px;
+      margin: 0;
+      cursor: pointer;
+    }
+    .qr-panel div {
+      display: none;
+    }
+    .qr-panel button {
+      margin: 0;
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+    .qr-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+    }
+    .qr-modal.active {
+      display: flex;
+    }
+    .qr-modal-content {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      max-width: 280px;
+    }
+    .qr-modal-content img {
+      width: 200px;
+      height: 200px;
+      margin-bottom: 10px;
+    }
+    .qr-modal-content button {
+      margin-top: 12px;
+      padding: 8px 16px;
+      font-size: 14px;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      background: #f5f5f5;
+      color: #333;
+      cursor: pointer;
+    }
+    @media (prefers-color-scheme: dark) {
+      .qr-modal-content {
+        background: #1a1a1a;
+        color: #fff;
+      }
+      .qr-modal-content button {
+        background: #2a2a2a;
+        border-color: #333;
+        color: #fff;
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    article {
+      padding: 14px;
+      font-size: 16px;
+    }
+  }
+</style>
+</head>
+<body>
+<article contenteditable="plaintext-only" spellcheck role="textbox" aria-label="Text editor area"></article>
+<div class="qr-panel" role="complementary" aria-label="Share options">
+  <img id="qr" alt="QR Code for sharing this note">
+  <div>Scan to open</div>
+  <button id="copyBtn" aria-label="Copy URL to clipboard">Copy URL</button>
+</div>
+<div class="qr-modal" id="qrModal">
+  <div class="qr-modal-content">
+    <img id="qrLarge" alt="QR Code">
+    <div style="margin-top: 8px; font-size: 13px; color: #666;">Scan to open on another device</div>
+    <button id="closeModal">Close</button>
+  </div>
+</div>
+<script>
+  const article = document.querySelector('article');
+  const qr = document.getElementById('qr');
+  const qrLarge = document.getElementById('qrLarge');
+  const qrModal = document.getElementById('qrModal');
+  const closeModal = document.getElementById('closeModal');
+  const copyBtn = document.getElementById('copyBtn');
+  const STORAGE_KEY = 'hash';
+  const SEPARATOR = '\x00';
+  article.addEventListener('input', debounce(500, save));
+  addEventListener('DOMContentLoaded', load);
+  addEventListener('hashchange', () => {
+    load();
+    updateQR();
+  });
+  addEventListener('load', () => {
+    new MutationObserver(save).observe(article, {
+      attributeFilter: ['style']
+    });
+    updateQR();
+  });
+  qr.addEventListener('click', () => {
+    if (window.innerWidth <= 900) {
+      qrModal.classList.add('active');
+    }
+  });
+  closeModal.addEventListener('click', () => {
+    qrModal.classList.remove('active');
+  });
+  qrModal.addEventListener('click', (e) => {
+    if (e.target === qrModal) {
+      qrModal.classList.remove('active');
+    }
+  });
+  async function load() {
+    try {
+      const hash = location.hash || localStorage.getItem(STORAGE_KEY) || '';
+      if (hash) await set(hash);
+      if (!location.hash && article.textContent) {
+        history.replaceState({}, '', await get());
+      }
+    } catch {
+      article.textContent = '';
+      article.removeAttribute('style');
+    }
+    article.focus();
+    updateTitle();
+  }
+  async function save() {
+    const hash = await get();
+    if (location.hash !== hash) {
+      history.replaceState({}, '', hash);
+      updateQR();
+    }
+    try {
+      localStorage.setItem(STORAGE_KEY, hash);
+    } catch {}
+    updateTitle();
+  }
+  async function set(hash) {
+    const [content, style] =
+      (await decompress(hash.slice(1))).split(SEPARATOR);
+    article.textContent = content || '';
+    style ? article.setAttribute('style', style)
+          : article.removeAttribute('style');
+  }
+  async function get() {
+    const style = article.getAttribute('style');
+    const content =
+      article.textContent + (style ? SEPARATOR + style : '');
+    return '#' + await compress(content);
+  }
+  function updateTitle() {
+    const m = article.textContent.match(/^\n*#(.+)\n/);
+    document.title = (m?.[1] ?? 'DropNote') + ' - Free Online Notepad | Janak Panthi';
+  }
+  function updateQR() {
+    const qrUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=' +
+      encodeURIComponent(location.href);
+    qr.src = qrUrl;
+    if (qrLarge) qrLarge.src = qrUrl;
+  }
+  copyBtn.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(location.href);
+      copyBtn.textContent = 'Copied!';
+      setTimeout(() => copyBtn.textContent = 'Copy URL', 1500);
+    } catch {
+      copyBtn.textContent = 'Failed';
+    }
+  });
+  const encoder = new TextEncoder();
+  const decoder = new TextDecoder();
+  async function compress(text) {
+    const data = encoder.encode(text);
+    for (const algo of ['brotli', 'deflate-raw']) {
+      try {
+        const stream = new CompressionStream(algo);
+        const writer = stream.writable.getWriter();
+        writer.write(data);
+        writer.close();
+        const buffer = await new Response(stream.readable).arrayBuffer();
+        return algo[0] +
+          new Uint8Array(buffer).toBase64({ alphabet: 'base64url' });
+      } catch {}
+    }
+    throw new Error('No compression supported');
+  }
+  async function decompress(hash) {
+    const algo = hash[0] === 'b' ? 'brotli' : 'deflate-raw';
+    const data = Uint8Array.fromBase64(hash.slice(1), {
+      alphabet: 'base64url'
+    });
+    const stream = new DecompressionStream(algo);
+    const writer = stream.writable.getWriter();
+    writer.write(data);
+    writer.close();
+    const buffer = await new Response(stream.readable).arrayBuffer();
+    return decoder.decode(buffer);
+  }
+  function debounce(ms, fn) {
+    let t;
+    return (...args) => {
+      clearTimeout(t);
+      t = setTimeout(fn, ms, ...args);
+    };
+  }
+</script>
+</body>
+</html>
