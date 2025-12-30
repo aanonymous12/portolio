@@ -1,13 +1,13 @@
 $(document).ready(function(){
     $(window).scroll(function(){
-        // sticky navbar on scroll script
+        
         if(this.scrollY > 20){
             $('.navbar').addClass("sticky");
         }else{
             $('.navbar').removeClass("sticky");
         }
         
-        // scroll-up button show/hide script
+        
         if(this.scrollY > 500){
             $('.scroll-up-btn').addClass("show");
         }else{
@@ -15,26 +15,25 @@ $(document).ready(function(){
         }
     });
 
-    // slide-up script
+    
     $('.scroll-up-btn').click(function(){
         $('html').animate({scrollTop: 0});
-        // removing smooth scroll on slide-up button click
+      
         $('html').css("scrollBehavior", "auto");
     });
 
     $('.navbar .menu li a').click(function(){
-        // applying again smooth scroll on menu items click
+        
         $('html').css("scrollBehavior", "smooth");
     });
 
-    // toggle menu/navbar script
+  
     $('.menu-btn').click(function(){
         $('.navbar .menu').toggleClass("active");
         $('.menu-btn i').toggleClass("active");
     });
 
-    // typing text animation script
-    var typed = new Typed(".typing", {
+        var typed = new Typed(".typing", {
         strings: ["Learner", "Developer", "Editor", "Designer", "Freelancer"],
         typeSpeed: 70,
         backSpeed: 60,
@@ -48,7 +47,7 @@ $(document).ready(function(){
         loop: true
     });
 
-    // owl carousel script
+   
     $('.carousel').owlCarousel({
         margin: 20,
         loop: true,
@@ -73,14 +72,14 @@ $(document).ready(function(){
 });
 $(document).ready(function(){
     $(window).scroll(function(){
-        // sticky navbar on scroll script
+        
         if(this.scrollY > 20){
             $('.navbar').addClass("sticky");
         }else{
             $('.navbar').removeClass("sticky");
         }
         
-        // scroll-up button show/hide script
+        
         if(this.scrollY > 500){
             $('.scroll-up-btn').addClass("show");
         }else{
@@ -88,25 +87,25 @@ $(document).ready(function(){
         }
     });
 
-    // slide-up script
+
     $('.scroll-up-btn').click(function(){
         $('html').animate({scrollTop: 0});
-        // removing smooth scroll on slide-up button click
+        
         $('html').css("scrollBehavior", "auto");
     });
 
     $('.navbar .menu li a').click(function(){
-        // applying again smooth scroll on menu items click
+        
         $('html').css("scrollBehavior", "smooth");
     });
 
-    // toggle menu/navbar script
+    
     $('.menu-btn').click(function(){
         $('.navbar .menu').toggleClass("active");
         $('.menu-btn i').toggleClass("active");
     });
 
-    // typing text animation script
+    
     var typed = new Typed(".typing", {
         strings: ["Learner", "Developer", "Editor", "Designer", "Freelancer"],
         typeSpeed: 70,
@@ -121,7 +120,7 @@ $(document).ready(function(){
         loop: true
     });
 
-    // owl carousel script
+    
     $('.carousel').owlCarousel({
         margin: 20,
         loop: true,
@@ -150,7 +149,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const statusMessage = document.getElementById("statusMessage");
 
     form.addEventListener("submit", function(event) {
-        event.preventDefault(); // Prevent the default form submission
+        event.preventDefault(); 
 
         const formData = new FormData(form);
 
@@ -184,12 +183,12 @@ document.addEventListener("DOMContentLoaded", function() {
         const menu = document.querySelector(".menu");
         const menuLinks = document.querySelectorAll(".menu li a");
 
-        // Toggle menu when hamburger icon is clicked
+       
         menuBtn.addEventListener("click", () => {
             menu.classList.toggle("active");
         });
 
-        // Close the menu when a link is clicked
+
         menuLinks.forEach(link => {
             link.addEventListener("click", () => {
                 menu.classList.remove("active");
@@ -214,8 +213,8 @@ document.querySelectorAll('.btn-readmore').forEach(button => {
         }
     });
 });
-// Get the current year
+
     const currentYear = new Date().getFullYear();
     
-    // Set the year in the footer
+    
     document.getElementById('current-year').textContent = currentYear;
